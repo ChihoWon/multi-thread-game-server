@@ -1,2 +1,8 @@
 # multi-thread-game-server
-for tutorial :D
+Multi-thread game server
+
+# mi blog
+justabullet.blog.me
+
+# información
+:P
