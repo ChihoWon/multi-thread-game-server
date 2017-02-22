@@ -16,7 +16,7 @@ public class ReceiverThread implements Runnable {
 
     private ClientObject clientObject;
 
-    ReceiverThread(ClientObject clientObject) {
+    public ReceiverThread(ClientObject clientObject) {
         this.clientObject = clientObject;
     }
 
@@ -26,7 +26,7 @@ public class ReceiverThread implements Runnable {
             try (InputStream is = clientObject.getSocket().getInputStream(); ObjectInputStream reader = new ObjectInputStream(is)) {
                 Packet packet;
                 while ((packet = (Packet) reader.readObject()) != null) {
-                    System.out.println(Thread.currentThread().getName() + " : " + packet);
+//                    System.out.println(Thread.currentThread().getName() + " : " + packet);
                     PacketAnalyzer.getInstance().analyzePacket(clientObject, packet);
                 }
             }catch (SocketException e) {
@@ -44,7 +44,8 @@ public class ReceiverThread implements Runnable {
             }
         }
         // These message will be replaced with slf4j.
-        System.out.printf("[!] %s is going to be terminated.\n", Thread.currentThread().getName());
+        System.out.printf("[!] %s(receiver) is going to be terminated.\n", Thread.currentThread().getName());
         SenderObject.getInstance().removeClientObject(clientObject);
+        SenderObject.getInstance().removeAutheticatedUser(clientObject);
     }
 }

@@ -19,7 +19,9 @@ public class ClientObject {
 
     private Socket socket;              // client socket
     private String hostIP;              // client's ip address
+    private String nickName;			// client nickname(id)
     private boolean isAuthenticated;    // is it login-user?
+    private boolean isReady;			// is it ready?
     private ObjectOutputStream sender;
 
     ClientObject(Socket socket) {
@@ -34,6 +36,7 @@ public class ClientObject {
         }
 
         hostIP = socket.getInetAddress().getHostAddress();
+        isAuthenticated = false;
     }
 
 }
